@@ -4,10 +4,56 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="CSS/styles.css">
     <title>Document</title>
 </head>
-<body>
+<body id="index">
+    <div class="wrapper">
+        <div class="header">        
+            <h1>Find You'r Movie!</h1>
+            <a href="watch-list.html">Wathlist</a>        
+        </div>
+        <div class="search-box-container">
+            <input type="text" class="search-box">
+            <button id='search-btn' type="submit">search</button>
+        </div>
+        <div class="movie-container">
+            <div class="image-container">
+                <img src="images/3515432-endgamedek-1.jpg" alt="alti">
+            </div>
+            <div class="movie-text">
+                <div class="movie-rating">
+                    <h2 class="movie-title">movie-title</h2>
+                    <i class="fa-solid fa-star"></i>
+                    <span class="movie-rate">rate</span>
+                </div>
+                <div class="movie-details">
+                    <span class="movie-length">movie-length</span>
+                    <span class="movie-type">movie-type</span>
+                    <div class="add-remove">                        
+                        <span data-icon="plus"> <i data-icon="plus" class="fa-solid fa-circle-plus"></i>add to watchlist </span>
+                    </div>
+                </div>
+                <div class="movie-discription">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id ullam, tempora inventore laudantium, voluptate accusantium delectus iste perspiciatis eos dolores vel a ea aliquid. Id fugiat ea eius tenetur, facilis sed pariatur nobis voluptate a ipsum dolore vero nostrum possimus magni consequuntur beatae natus, itaque ex voluptatem distinctio veniam consectetur?</p>
+                </div>
+            </div>
+                    
+        </div>
+        <hr>
+    
+                
+        
+    </div>
+     
+
+
+
+    
+
+
+
     <script src="index.js"></script>
 </body>
 </html>
