@@ -7,6 +7,7 @@ let isSearched=false;
 
 
 
+
 document.addEventListener('click',(event)=>{
     
     const searchInput=document.querySelector('.search-box');
@@ -31,44 +32,80 @@ document.addEventListener('click',(event)=>{
            
             //========handeling ADDING movies to watchlist and changing the btn and text.======
         if(pressedIcon==='plus'){ 
-            console.log(movieId);      
-                for(let i=0; i<iconChange.length;i++){
+            let inWatchlist=false;
+            console.log(movieId.imdbID);  
+                //Changing the watchlist icon=======    
+               
+                //adding movie to watchlist and save the array ont he localStorage.
+                if(watchListArray.length>0){
+                    for(let i=0; i<watchListArray.length;i++){
+                        if(watchListArray[i].imdbID===movieId.imdbID){
+                            console.log('the movie is already in the watchlist');
+                            inWatchlist=true;
+                            console.log(inWatchlist);
+                            break;
+                        }
+                    }
+                    if(!inWatchlist){
+                        watchListArray.push(movieId);
+                        localStorage.setItem('watchList',JSON.stringify(watchListArray));
+                        watchListArray=JSON.parse(localStorage.getItem('watchList'));
+                        console.log(movieId +'added to the watchlist array');
+                        console.log(watchListArray);
+                        for(let i=0; i<iconChange.length;i++){
+                            if(iconChange[i].dataset.id===pressedId){
+                                iconChange[i].innerHTML=`${watchListBtn(movieId,false)}`;
+                                break;                                           
+                            }            
+                        }
+                    }
+                }else{
+                    for(let i=0; i<iconChange.length;i++){
                         if(iconChange[i].dataset.id===pressedId){
                             iconChange[i].innerHTML=`${watchListBtn(movieId,false)}`;
                             break;                                           
                         }            
                     }
-                //adding movie to watchlist and save the array ont he localStorage. 
+                    watchListArray.push(movieId);
+                    localStorage.setItem('watchList',JSON.stringify(watchListArray));
+                    watchListArray=JSON.parse(localStorage.getItem('watchList'));
+                    console.log(watchListArray); 
+                }           
+                     
                 
-                watchListArray.push(movieId);
-                localStorage.setItem('watchList',JSON.stringify(watchListArray));               
-                console.log(watchListArray);
+            
         }
         if(pressedIcon==='minus'){            
             console.log(pressedIcon);
             console.log(pressedId);
             console.log(iconChange);
             var movieId=watchListArray.find(movie=> movie.imdbID===pressedId);
-            console.log(movieId);
-            if(watchListArray.length>0){
-              let movieToDelete=watchListArray.find(movie=>movie.imdbID===movieId.imdbID);
-              let index=watchListArray.indexOf(movieToDelete);
-              watchListArray.splice(index,1);
-              localStorage.setItem('watchList',JSON.stringify(watchListArray));
-              watchListArray= JSON.parse(localStorage.getItem('watchList') || '[]');
-              renderMovieCard(watchListArray,false);
-              if(watchListArray.length===0){
-                watchlistRender();
-              }
-            }
-           
-             
+            //console.log(movieId);  
+            for(let i=0; i<watchListArray.length;i++){
+                if(watchListArray[i].imdbID===pressedId){
+                    watchListArray.splice(i,1);
+                    localStorage.setItem('watchList',JSON.stringify(watchListArray));
+                    watchListArray=watchListArray= JSON.parse(localStorage.getItem('watchList') || '[]'); 
+                    if(main.id==='watchlist'){
+                        renderMovieCard(watchListArray,false);
+                        if(watchListArray.length===0){
+                            watchlistRender();
+                        }
+                    }else{
+                        for(let i=0; i<iconChange.length;i++){
+                            if(iconChange[i].dataset.id===pressedId){
+                                iconChange[i].innerHTML=`${watchListBtn(movieId,true)}`;
+                                break;                                           
+                            }            
+                        }
+                    }
+                }              
+                
+            } 
+                   
         }
        
-     }         
-       
-     
-    
+     }    
 })
 
 const watchListBtn= (movie,plus)=>{
@@ -206,17 +243,6 @@ window.addEventListener('load',()=>{
 
 
  
-/* const watchlistPlaceholder=()=>{
-    watch
-} */
-
-
-
-
-/*  else{
-    renderMovieCard(watchListArray,plusOrMinus);
-}  */
-
 
 
 
