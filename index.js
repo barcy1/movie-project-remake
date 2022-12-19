@@ -156,8 +156,20 @@ const renderMovieCard = (movies,plusOrMinus)=>{
     const check=document.querySelector('.check');
     console.log(plusOrMinus);
     console.log(movies);
-    check.innerHTML=`<section>${movies.map(movie=>(gettingHtml(movie,plusOrMinus))).join('')}</setion>`
-    /* check.innerHTML =`<section>${(moviesArray.map(movie=>{gettingHtml(movie, plusOrMinus)})).join('')}</section>` */
+    check.innerHTML=`<section>${movies.map(movie=>(gettingHtml(movie,plusOrMinus))).join('')}</setion>`;
+  
+     if(watchListArray.length>0){
+        const iconChange=document.querySelectorAll('.add-remove');
+        
+        for(let i=0;i<movies.length;i++){
+            for(let j=0; j<watchListArray.length;j++){
+                if(movies[i].imdbID===watchListArray[j].imdbID){
+                    iconChange[i].innerHTML=`${watchListBtn(movies[i],false)}`;
+                }
+            }
+        }
+        
+    } 
 }
 
 
